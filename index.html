@@ -8,100 +8,139 @@
 
 <style>
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
-font-family: Arial, sans-serif;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 margin:0;
-background:#f5f5f5;
-color:#333;
+background:#f6f8fa;
+color:#222;
 line-height:1.6;
 }
 
 header{
-background:#111;
+background:#0d1117;
 color:white;
-padding:3rem 1rem;
+padding:4rem 1rem;
 text-align:center;
 }
 
+header h1{
+font-size:2.8rem;
+margin-bottom:.5rem;
+}
+
+header p{
+color:#c9d1d9;
+font-size:1.1rem;
+}
+
 nav{
-margin-top:1rem;
+margin-top:1.5rem;
 }
 
 nav a{
-color:white;
-margin:0 12px;
+color:#c9d1d9;
+margin:0 14px;
 text-decoration:none;
-font-weight:bold;
+font-weight:500;
 }
 
 nav a:hover{
-text-decoration:underline;
+color:white;
+}
+
+.hero{
+margin-top:1rem;
+max-width:650px;
+margin-left:auto;
+margin-right:auto;
 }
 
 section{
 max-width:1000px;
 margin:auto;
-padding:2rem;
+padding:3rem 1.5rem;
 }
 
 h2{
-border-bottom:2px solid #ddd;
-padding-bottom:.5rem;
-margin-bottom:1rem;
+font-size:1.8rem;
+margin-bottom:1.5rem;
 }
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:24px;
 }
 
 .card{
 background:white;
-padding:1.5rem;
-border-radius:8px;
-box-shadow:0 2px 6px rgba(0,0,0,.1);
+padding:1.6rem;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.06);
+transition:transform .2s, box-shadow .2s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .project img{
 width:100%;
 border-radius:6px;
-margin-bottom:10px;
+margin-bottom:12px;
 }
 
 .skills span{
 display:inline-block;
-background:#e0e0e0;
-padding:6px 10px;
-margin:4px;
-border-radius:5px;
+background:#eaeef2;
+padding:7px 12px;
+margin:5px;
+border-radius:6px;
 font-size:.9rem;
 }
 
+.tag{
+display:inline-block;
+background:#eef2ff;
+color:#3730a3;
+padding:4px 8px;
+margin-right:6px;
+border-radius:4px;
+font-size:.75rem;
+}
+
 button{
-background:#333;
+background:#0d1117;
 color:white;
 border:none;
-padding:10px 16px;
-border-radius:5px;
+padding:10px 18px;
+border-radius:6px;
 cursor:pointer;
+font-size:.9rem;
 }
 
 button:hover{
-background:#555;
+background:#30363d;
+}
+
+.contact a{
+display:block;
+margin-top:6px;
+color:#0969da;
+text-decoration:none;
 }
 
 footer{
 text-align:center;
-padding:1rem;
-background:#ddd;
+padding:1.5rem;
+background:#eaeef2;
 margin-top:2rem;
-}
-
-.hero p{
-max-width:600px;
-margin:auto;
-margin-top:10px;
+font-size:.9rem;
 }
 
 </style>
@@ -124,9 +163,10 @@ margin-top:10px;
 
 <div class="hero">
 <p>
-Hi! My name is Isabella, and I’m currently pursuing a Bachelor of Science in General Engineering at Harvey Mudd College. While I have a strong background 
-across the STEM fields, I am particularly interested in a career in Computer and Electrical Engineering, and I aim to utilize my skills to create a positive 
-impact in my community. I enjoy building real systems that connect code with physical devices, and love to learn about how things work!
+Engineering student at Harvey Mudd College interested in firmware,
+embedded systems, and hardware design. I enjoy building systems that
+connect software with real-world devices and solving challenging
+engineering problems.
 </p>
 </div>
 
@@ -137,9 +177,9 @@ impact in my community. I enjoy building real systems that connect code with phy
 <h2>About Me</h2>
 
 <p>
-I'm an engineering student at Harvey Mudd College focused on electrical
-engineering and hardware systems. I enjoy working on projects that involve
-signal processing, embedded systems, and experimental hardware design.
+Hi! My name is Isabella, and I’m currently pursuing a Bachelor of Science in General Engineering at Harvey Mudd College. While I have a strong background 
+across the STEM fields, I am particularly interested in a career in Computer and Electrical Engineering, and I aim to utilize my skills to create a positive 
+impact in my community. I enjoy building real systems that connect code with physical devices, and love to learn about how things work!
 </p>
 
 <p>
@@ -183,46 +223,25 @@ I get to design, test, and debug real systems.
 
 <img src="project1.jpg">
 
-<h3>Signal Processing Analysis</h3>
+<h3>Accelerometer Signal Processing</h3>
 
-<p>
-Analyzed accelerometer data using FFT and frequency-domain filtering.
-Implemented bandpass filtering and spectral analysis in MATLAB.
-</p>
-
-<a href="#">View Code</a>
-
+<div>
+<span class="tag">MATLAB</span>
+<span class="tag">FFT</span>
+<span class="tag">Signal Processing</span>
 </div>
 
-
-<div class="card project">
-
-<img src="project2.jpg">
-
-<h3>Embedded Control System</h3>
-
 <p>
-Designed firmware to control a sensor-driven system using microcontrollers.
-Implemented real-time data acquisition and control logic.
+Processed accelerometer data using FFT analysis and designed
+frequency-domain filters to remove noise and isolate system
+vibration modes.
 </p>
 
-<a href="#">View Code</a>
+<br>
 
-</div>
-
-
-<div class="card project">
-
-<img src="project3.jpg">
-
-<h3>Hardware Lab Project</h3>
-
-<p>
-Built and tested an electronic system involving analog signal conditioning
-and measurement instrumentation.
-</p>
-
-<a href="#">View Code</a>
+<a href="https://github.com/isabella-vera">
+<button>View Code</button>
+</a>
 
 </div>
 
