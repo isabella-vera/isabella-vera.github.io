@@ -3,105 +3,293 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Name | Portfolio</title>
+
+<title>Isabella Vera | Portfolio</title>
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f7f7f7;
-    color: #333;
+
+body{
+font-family: Arial, sans-serif;
+margin:0;
+background:#f5f5f5;
+color:#333;
+line-height:1.6;
 }
 
-header {
-    background: #222;
-    color: white;
-    text-align: center;
-    padding: 2rem;
+header{
+background:#111;
+color:white;
+padding:3rem 1rem;
+text-align:center;
 }
 
-nav a {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
+nav{
+margin-top:1rem;
 }
 
-section {
-    max-width: 900px;
-    margin: auto;
-    padding: 2rem;
+nav a{
+color:white;
+margin:0 12px;
+text-decoration:none;
+font-weight:bold;
 }
 
-h2 {
-    border-bottom: 2px solid #ddd;
-    padding-bottom: .5rem;
+nav a:hover{
+text-decoration:underline;
 }
 
-.project {
-    background: white;
-    padding: 1rem;
-    margin-top: 1rem;
-    border-radius: 8px;
+section{
+max-width:1000px;
+margin:auto;
+padding:2rem;
 }
 
-footer {
-    text-align: center;
-    padding: 1rem;
-    background: #eee;
+h2{
+border-bottom:2px solid #ddd;
+padding-bottom:.5rem;
+margin-bottom:1rem;
 }
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:1.5rem;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+.project img{
+width:100%;
+border-radius:6px;
+margin-bottom:10px;
+}
+
+.skills span{
+display:inline-block;
+background:#e0e0e0;
+padding:6px 10px;
+margin:4px;
+border-radius:5px;
+font-size:.9rem;
+}
+
+button{
+background:#333;
+color:white;
+border:none;
+padding:10px 16px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#555;
+}
+
+footer{
+text-align:center;
+padding:1rem;
+background:#ddd;
+margin-top:2rem;
+}
+
+.hero p{
+max-width:600px;
+margin:auto;
+margin-top:10px;
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>Your Name</h1>
-<p>Electrical Engineering Student | Hardware | Embedded Systems</p>
+
+<h1>Isabella Vera</h1>
+<p>General Engineering Student | Firmware | Embedded Systems</p>
 
 <nav>
 <a href="#about">About</a>
+<a href="#skills">Skills</a>
 <a href="#projects">Projects</a>
+<a href="#coursework">Coursework</a>
 <a href="#contact">Contact</a>
 </nav>
+
+<div class="hero">
+<p>
+Hi! My name is Isabella, and I’m currently pursuing a Bachelor of Science in General Engineering at Harvey Mudd College. While I have a strong background 
+across the STEM fields, I am particularly interested in a career in Computer and Electrical Engineering, and I aim to utilize my skills to create a positive 
+impact in my community. I enjoy building real systems that connect code with physical devices, and love to learn about how things work!
+</p>
+</div>
+
 </header>
 
 <section id="about">
+
 <h2>About Me</h2>
+
 <p>
-I’m an engineering student interested in hardware systems, embedded firmware,
-and signal processing. I enjoy building projects that connect software with
-physical systems.
+I'm an engineering student at Harvey Mudd College focused on electrical
+engineering and hardware systems. I enjoy working on projects that involve
+signal processing, embedded systems, and experimental hardware design.
 </p>
+
+<p>
+My favorite experiences so far have been lab-based engineering courses where
+I get to design, test, and debug real systems.
+</p>
+
+<a href="resume.pdf" download>
+<button>Download Resume</button>
+</a>
+
+</section>
+
+<section id="skills">
+
+<h2>Skills</h2>
+
+<div class="skills">
+
+<span>MATLAB</span>
+<span>Python</span>
+<span>C</span>
+<span>Embedded Systems</span>
+<span>Signal Processing</span>
+<span>Oscilloscopes</span>
+<span>Circuit Design</span>
+<span>PCB Design</span>
+<span>Data Analysis</span>
+
+</div>
+
 </section>
 
 <section id="projects">
+
 <h2>Projects</h2>
 
-<div class="project">
-<h3>Project Title</h3>
-<p>Short description of what the project does and what technologies you used.</p>
+<div class="grid">
+
+<div class="card project">
+
+<img src="project1.jpg">
+
+<h3>Signal Processing Analysis</h3>
+
+<p>
+Analyzed accelerometer data using FFT and frequency-domain filtering.
+Implemented bandpass filtering and spectral analysis in MATLAB.
+</p>
+
 <a href="#">View Code</a>
+
 </div>
 
-<div class="project">
-<h3>Another Project</h3>
-<p>Description of another project. Mention interesting engineering challenges.</p>
+
+<div class="card project">
+
+<img src="project2.jpg">
+
+<h3>Embedded Control System</h3>
+
+<p>
+Designed firmware to control a sensor-driven system using microcontrollers.
+Implemented real-time data acquisition and control logic.
+</p>
+
 <a href="#">View Code</a>
+
+</div>
+
+
+<div class="card project">
+
+<img src="project3.jpg">
+
+<h3>Hardware Lab Project</h3>
+
+<p>
+Built and tested an electronic system involving analog signal conditioning
+and measurement instrumentation.
+</p>
+
+<a href="#">View Code</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="coursework">
+
+<h2>Relevant Coursework</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>E80</h3>
+<p>
+Integrated engineering lab involving experimental design, instrumentation,
+data analysis, and engineering communication.
+</p>
+</div>
+
+<div class="card">
+<h3>E85</h3>
+<p>
+Hands-on engineering design course emphasizing experimentation and
+system-level thinking.
+</p>
+</div>
+
+<div class="card">
+<h3>E79</h3>
+<p>
+Engineering lab course focused on measurement techniques, circuit design,
+and data analysis.
+</p>
+</div>
+
 </div>
 
 </section>
 
 <section id="contact">
+
 <h2>Contact</h2>
+
+<p>Email: ivera@g.hmc.edu</p>
+
 <p>
-Email: your.email@example.com <br>
-GitHub: <a href="https://github.com/yourusername">github.com/yourusername</a><br>
-LinkedIn: <a href="#">Your LinkedIn</a>
+GitHub:
+<a href="https://github.com/isabella-vera">
+github.com/isabella-vera
+</a>
 </p>
+
+<p>
+LinkedIn:
+<a href="https://www.linkedin.com/in/isabellavera/">
+linkedin.com/in/isabellavera/
+</a>
+</p>
+
 </section>
 
 <footer>
-<p>© 2026 Your Name</p>
+
+<p>© 2026 Isabella Vera</p>
+
 </footer>
 
 </body>
