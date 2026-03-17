@@ -56,7 +56,6 @@
     cursor: pointer;
   }
   .headshot-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .headshot-frame img.loaded { display: block; }
   .upload-hint { font-family: var(--mono); font-size: 10px; color: var(--pink); letter-spacing: 0.06em; text-align: center; line-height: 1.6; padding: 0 1rem; }
   .upload-hint span { font-size: 22px; display: block; margin-bottom: 0.5rem; opacity: 0.5; }
   #headshot-input { display: none; }
@@ -98,8 +97,7 @@
     flex-direction: column; gap: 0.4rem; cursor: pointer;
     position: relative; overflow: hidden; flex-shrink: 0;
   }
-  .project-img-slot img { width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; }
-  .project-img-slot img.loaded { display: block; }
+  .project-img-slot img { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; }
   .img-hint { font-family: var(--mono); font-size: 9px; color: var(--muted); text-align: center; line-height: 1.5; padding: 0 0.75rem; letter-spacing: 0.04em; }
   .img-hint-icon { font-size: 16px; opacity: 0.35; color: var(--muted); }
   .project-img-slot input[type=file] { display: none; }
@@ -153,7 +151,7 @@
   footer { border-top: 1px solid var(--border); padding: 2rem 4rem; text-align: center; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.04em; }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-  .fade-in { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in { opacity: 0; transform: translateY(10px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 700px) {
@@ -171,7 +169,7 @@
 <body>
 
 <nav>
-  <a class="nav-logo" href="#hero">Isabella Vera</a>
+  <a class="nav-logo" href="#hero">IV.eng</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Work</a></li>
@@ -183,11 +181,11 @@
 
 <div id="hero">
   <div class="hero-left">
-    <p class="hero-tag">Harvey Mudd College · Engineering · Class of 2028</p>
+    <p class="hero-tag">General Engineering · Harvey Mudd College · Class of 2028</p>
     <h1 class="hero-name">Hi, I'm<br><em>Isabella Vera.</em></h1>
     <p class="hero-sub">Engineer at Harvey Mudd College building embedded systems, autonomous vehicles, and hardware that solves real problems. Based in Los Angeles.</p>
     <div class="hero-awards">
-      <span class="award-pill">President's Scholar</span>
+      <span class="award-pill">President's Scholars Program</span>
       <span class="award-pill">Annenberg Leadership Fellow</span>
       <span class="award-pill">Dean's List</span>
     </div>
@@ -395,8 +393,8 @@
       <h2 class="section-title">Let's connect</h2>
       <p>I'm looking for summer internship opportunities in the LA area — embedded systems, aerospace, and defense are my top interests.</p>
       <p>Whether it's an opportunity, a collab, or just to talk engineering — I'd love to hear from you.</p>
-      <a href="mailto:ivera@g.hmc.edu" class="btn btn-primary" style="margin-top:0.5rem;">Send a message</a>
-      <a href="RESUME.pdf" class="resume-download">
+      <a href="/cdn-cgi/l/email-protection#f8918e9d8a99b89fd690959bd69d9c8d" class="btn btn-primary" style="margin-top:0.5rem;">Send a message</a>
+      <a href="RESUME.pdf" class="resume-download" target="_blank">
         <div>
           <p class="rd-label">Download</p>
           <p class="rd-title">My Resume</p>
@@ -406,8 +404,8 @@
       </a>
     </div>
     <div class="contact-links">
-      <a href="mailto:ivera@g.hmc.edu" class="contact-link">
-        <div><p class="link-label">Email</p><p class="link-value">ivera@g.hmc.edu</p></div>
+      <a href="/cdn-cgi/l/email-protection#d2bba4b7a0b392b5fcbabfb1fcb7b6a7" class="contact-link">
+        <div><p class="link-label">Email</p><p class="link-value"><span class="__cf_email__" data-cfemail="345d4251465574531a5c59571a515041">[email&#160;protected]</span></p></div>
         <span class="link-arrow">↗</span>
       </a>
       <a href="https://www.linkedin.com/in/isabellavera/" class="contact-link" target="_blank">
@@ -425,7 +423,7 @@
 
 <footer>Isabella Vera · Harvey Mudd College · General Engineering · Class of 2028</footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function switchTab(tab, btn) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -442,30 +440,20 @@ function triggerImgUpload(slot) {
     reader.onload = function(e) {
       const img = slot.querySelector('img');
       img.src = e.target.result;
-      img.classList.add('loaded');
-      slot.querySelector('.img-hint-icon').style.display = 'none';
-      slot.querySelector('.img-hint').style.display = 'none';
+      const icon = slot.querySelector('.img-hint-icon');
+      const hint = slot.querySelector('.img-hint');
+      if (icon) icon.style.display = 'none';
+      if (hint) hint.style.display = 'none';
     };
     reader.readAsDataURL(file);
   };
 }
-document.getElementById('headshot-input').addEventListener('change', function() {
-  const file = this.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const img = document.getElementById('headshot-img');
-    img.src = e.target.result;
-    img.classList.add('loaded');
-    document.getElementById('headshot-hint').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-});
 const els = document.querySelectorAll('.fade-in');
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+}, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
 els.forEach(el => obs.observe(el));
+setTimeout(() => { els.forEach(el => el.classList.add('visible')); }, 1000);
 </script>
 </body>
 </html>
