@@ -4,153 +4,174 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Isabella Vera</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #faf9f7; --bg2: #f3f1ee; --text: #1a1a1a; --muted: #888880;
-    --border: #e4e2de; --pink: #d4537e; --pink-light: #f4c0d1; --pink-bg: #fbeaf0;
-    --font: 'DM Sans', sans-serif; --serif: 'Instrument Serif', serif; --mono: 'DM Mono', monospace;
+    --bg: #ffffff; --bg2: #f5f4f2; --text: #111111; --muted: #555550;
+    --subtle: #99998a; --border: #e0deda; --magenta: #b5006e;
+    --font: 'Inter', sans-serif;
   }
   html { scroll-behavior: smooth; }
   body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; }
 
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 1.25rem 4rem;
-    background: rgba(250,249,247,0.92); backdrop-filter: blur(10px);
+    padding: 1.1rem 4rem;
+    background: rgba(255,255,255,0.97);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo { font-family: var(--mono); font-size: 13px; color: var(--pink); text-decoration: none; letter-spacing: 0.06em; }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .nav-logo { font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: 0.01em; cursor: pointer; }
+  .nav-links { display: flex; gap: 0; list-style: none; align-items: center; }
+  .nav-links li { position: relative; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 400;
+    padding: 0.4rem 1rem; display: block; transition: color 0.15s; cursor: pointer;
+  }
   .nav-links a:hover { color: var(--text); }
-  .nav-resume { font-family: var(--mono); font-size: 11px; color: var(--pink); border: 1px solid var(--pink-light); background: var(--pink-bg); padding: 4px 12px; border-radius: 100px; text-decoration: none; transition: all 0.2s; letter-spacing: 0.04em; }
-  .nav-resume:hover { background: var(--pink); color: white; border-color: var(--pink); }
+  .nav-links a.active { color: var(--text); font-weight: 500; }
+  .nav-links a.active::after { content: ''; position: absolute; bottom: -1.1rem; left: 1rem; right: 1rem; height: 2px; background: var(--magenta); }
+  .nav-resume {
+    font-size: 12px; font-weight: 500; color: var(--text);
+    border: 1px solid var(--text); background: transparent;
+    padding: 5px 14px; border-radius: 3px; text-decoration: none;
+    transition: all 0.2s; letter-spacing: 0.02em; margin-left: 0.75rem;
+  }
+  .nav-resume:hover { background: var(--text); color: white; }
 
-  section { padding: 6rem 4rem; max-width: 860px; margin: 0 auto; }
+  /* PAGES */
+  .page { display: none; min-height: 100vh; padding-top: 64px; }
+  .page.active { display: block; }
+  .page-inner { max-width: 860px; margin: 0 auto; padding: 4rem; }
 
-  #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center; padding-top: 8rem; max-width: 860px; margin: 0 auto; padding-left: 4rem; padding-right: 4rem; }
+  /* SECTION HEADERS */
+  .section-label { font-size: 10px; font-weight: 500; color: var(--subtle); letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 0.4rem; }
+  .section-title { font-size: 1.75rem; font-weight: 600; color: var(--text); line-height: 1.2; margin-bottom: 0.5rem; display: inline-block; }
+  .section-title-line { width: 32px; height: 2px; background: var(--magenta); margin-bottom: 2.5rem; }
+
+  /* PAGE 1: HOME + ABOUT */
+  #page-home .page-inner { display: grid; grid-template-columns: 1fr 200px; gap: 4rem; align-items: center; min-height: calc(100vh - 64px); padding-top: 3rem; padding-bottom: 3rem; }
   .hero-left { display: flex; flex-direction: column; justify-content: center; }
-  .hero-tag { font-family: var(--mono); font-size: 12px; color: var(--pink); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
-  .hero-name { font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s 0.35s forwards; }
-  .hero-name em { font-style: italic; color: var(--pink); }
-  .hero-sub { font-size: 1rem; color: var(--muted); max-width: 460px; margin-bottom: 1.75rem; opacity: 0; animation: fadeUp 0.6s 0.5s forwards; font-weight: 300; line-height: 1.8; }
-  .hero-awards { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.75rem; opacity: 0; animation: fadeUp 0.6s 0.58s forwards; }
-  .award-pill { font-family: var(--mono); font-size: 10px; color: var(--pink); background: var(--pink-bg); border: 1px solid var(--pink-light); padding: 3px 10px; border-radius: 100px; }
-  .hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 0.65s forwards; }
-
-  .hero-right { opacity: 0; animation: fadeUp 0.6s 0.4s forwards; flex-shrink: 0; }
-  .headshot-frame { width: 200px; height: 260px; border-radius: 120px 120px 80px 80px; overflow: hidden; border: 3px solid var(--pink-light); background: var(--pink-bg); }
+  .hero-tag { font-size: 11px; font-weight: 400; color: var(--subtle); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem; }
+  .hero-name { font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.6rem; color: var(--text); }
+  .hero-name-line { width: 40px; height: 2px; background: var(--magenta); margin-bottom: 1.5rem; }
+  .hero-sub { font-size: 15px; color: var(--muted); max-width: 460px; margin-bottom: 1.5rem; font-weight: 300; line-height: 1.8; }
+  .hero-awards { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+  .award-pill { font-size: 10px; font-weight: 500; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); padding: 3px 10px; border-radius: 2px; letter-spacing: 0.03em; }
+  .hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .hero-right { flex-shrink: 0; }
+  .headshot-frame { width: 200px; height: 260px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); background: var(--bg2); }
   .headshot-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .btn { padding: 0.6rem 1.4rem; border-radius: 100px; font-size: 13px; font-family: var(--font); font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-block; border: none; }
-  .btn-primary { background: var(--pink); color: white; border: 1px solid var(--pink); }
-  .btn-primary:hover { background: #c0496e; }
-  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .btn-outline:hover { border-color: #bbb; background: var(--bg2); }
-
-  .section-header { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 3rem; }
-  .section-label { font-family: var(--mono); font-size: 11px; color: var(--pink); letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
-  .section-line { flex: 1; height: 1px; background: var(--border); }
-  .section-title { font-family: var(--serif); font-size: 2rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 1.25rem; font-style: italic; }
-
+  .about-section { border-top: 1px solid var(--border); max-width: 860px; margin: 0 auto; padding: 4rem; }
   .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3.5rem; align-items: start; }
   .about-text p { color: var(--muted); margin-bottom: 1rem; font-weight: 300; font-size: 15px; }
-  .detail-row { display: flex; justify-content: space-between; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-  .detail-row .label { color: var(--muted); font-weight: 300; }
-  .detail-row .value { color: var(--text); font-weight: 400; text-align: right; }
+  .detail-row { display: flex; justify-content: space-between; padding: 0.65rem 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .detail-row .label { color: var(--subtle); font-weight: 400; }
+  .detail-row .value { color: var(--text); font-weight: 500; text-align: right; }
 
-  .tab-bar { display: flex; margin-bottom: 1.5rem; border: 1px solid var(--border); border-radius: 100px; overflow: hidden; width: fit-content; background: white; }
-  .tab-btn { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 7px 18px; border: none; background: transparent; color: var(--muted); cursor: pointer; transition: all 0.2s; }
-  .tab-btn.active { background: var(--pink); color: white; border-radius: 100px; }
+  /* BUTTONS */
+  .btn { padding: 0.6rem 1.4rem; border-radius: 3px; font-size: 13px; font-family: var(--font); font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-block; }
+  .btn-primary { background: var(--text); color: white; border: 1px solid var(--text); }
+  .btn-primary:hover { background: #333; border-color: #333; }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--text); }
+
+  /* PAGE 2: WORK */
+  .tab-bar { display: flex; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); gap: 0; }
+  .tab-btn { font-size: 12px; font-weight: 400; letter-spacing: 0.04em; padding: 8px 20px 10px; border: none; background: transparent; color: var(--subtle); cursor: pointer; transition: all 0.2s; position: relative; }
+  .tab-btn.active { color: var(--text); font-weight: 500; }
+  .tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--magenta); }
   .tab-content { display: none; }
   .tab-content.active { display: block; }
 
-  .projects-grid { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  .project-card { background: white; border-bottom: 1px solid var(--border); transition: background 0.2s; cursor: pointer; }
+  .projects-grid { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .project-card { background: white; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 150px 1fr; transition: background 0.15s; cursor: pointer; }
   .project-card:last-child { border-bottom: none; }
-  .project-card:hover { background: var(--pink-bg); }
-  .project-img-slot { width: 160px; height: 130px; background: var(--bg2); border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.4rem; position: relative; overflow: hidden; flex-shrink: 0; }
+  .project-card:hover { background: var(--bg2); }
+  .project-img-slot { width: 150px; height: 120px; background: var(--bg2); border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.3rem; position: relative; overflow: hidden; flex-shrink: 0; }
   .project-img-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
   .project-img-slot img[src=""] { display: none; }
-  .img-hint { font-family: var(--mono); font-size: 9px; color: var(--muted); text-align: center; line-height: 1.5; padding: 0 0.75rem; letter-spacing: 0.04em; }
-  .img-hint-icon { font-size: 16px; opacity: 0.35; color: var(--muted); }
-  .project-body { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; }
-  .project-number { font-family: var(--mono); font-size: 11px; color: var(--pink); letter-spacing: 0.08em; margin-bottom: 0.2rem; }
-  .project-date { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 0.4rem; }
-  .project-title { font-size: 14px; font-weight: 500; margin-bottom: 0.35rem; }
-  .project-desc { font-size: 12.5px; color: var(--muted); font-weight: 300; line-height: 1.65; margin-bottom: 0.7rem; flex: 1; }
+  .img-hint { font-size: 9px; color: var(--subtle); text-align: center; line-height: 1.5; }
+  .img-hint-icon { font-size: 14px; opacity: 0.3; color: var(--subtle); }
+  .project-body { padding: 1.1rem 1.4rem; display: flex; flex-direction: column; }
+  .project-number { font-size: 10px; color: var(--subtle); letter-spacing: 0.06em; margin-bottom: 0.15rem; }
+  .project-date { font-size: 10px; color: var(--subtle); margin-bottom: 0.35rem; }
+  .project-title { font-size: 14px; font-weight: 500; margin-bottom: 0.3rem; color: var(--text); }
+  .project-desc { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.65; margin-bottom: 0.65rem; flex: 1; }
   .project-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
-  .tag { font-family: var(--mono); font-size: 10px; color: var(--pink); background: var(--pink-bg); border: 1px solid var(--pink-light); padding: 2px 8px; border-radius: 100px; }
-  .project-card-hint { font-family: var(--mono); font-size: 10px; color: var(--pink); margin-top: 0.6rem; opacity: 0.7; }
+  .tag { font-size: 10px; font-weight: 400; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); padding: 1px 7px; border-radius: 2px; }
+  .project-card-hint { font-size: 10px; color: var(--subtle); margin-top: 0.5rem; }
 
-  .exp-list { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  .exp-card { padding: 1.5rem 2rem; background: white; border-bottom: 1px solid var(--border); transition: background 0.2s; }
+  .exp-list { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .exp-card { padding: 1.4rem 1.75rem; background: white; border-bottom: 1px solid var(--border); transition: background 0.15s; }
   .exp-card:last-child { border-bottom: none; }
-  .exp-card:hover { background: var(--pink-bg); }
-  .exp-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.3rem; gap: 1rem; }
-  .exp-title { font-size: 14px; font-weight: 500; }
-  .exp-date { font-family: var(--mono); font-size: 10px; color: var(--pink); white-space: nowrap; letter-spacing: 0.04em; }
-  .exp-org { font-size: 12px; color: var(--muted); margin-bottom: 0.6rem; font-weight: 300; }
-  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+  .exp-card:hover { background: var(--bg2); }
+  .exp-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.2rem; gap: 1rem; }
+  .exp-title { font-size: 14px; font-weight: 500; color: var(--text); }
+  .exp-date { font-size: 10px; color: var(--subtle); white-space: nowrap; letter-spacing: 0.03em; }
+  .exp-org { font-size: 12px; color: var(--muted); margin-bottom: 0.5rem; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
   .exp-bullets li { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.6; padding-left: 1rem; position: relative; }
-  .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--pink-light); }
+  .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--border); }
 
-  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .skill-group { padding: 1.25rem 1.5rem; border: 1px solid var(--border); border-radius: 10px; background: white; }
-  .skill-group-title { font-family: var(--mono); font-size: 10px; color: var(--pink); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
-  .skill-list { display: flex; flex-direction: column; gap: 0.45rem; }
+  .skills-header { margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 0; }
+  .skill-group { padding: 1.25rem 1.4rem; border: 1px solid var(--border); border-radius: 4px; background: white; }
+  .skill-group-title { font-size: 10px; font-weight: 600; color: var(--text); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.85rem; padding-bottom: 0.65rem; border-bottom: 1px solid var(--border); }
+  .skill-list { display: flex; flex-direction: column; gap: 0.4rem; }
   .skill-item { font-size: 13px; color: var(--muted); font-weight: 300; display: flex; align-items: center; gap: 0.5rem; }
-  .skill-dot { width: 4px; height: 4px; background: var(--pink-light); border-radius: 50%; flex-shrink: 0; }
+  .skill-dot { width: 3px; height: 3px; background: var(--border); border-radius: 50%; flex-shrink: 0; }
 
-  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
+  /* PAGE 3: CONTACT */
+  #page-contact .page-inner { max-width: 680px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
   .contact-text p { color: var(--muted); font-weight: 300; margin-bottom: 1rem; font-size: 15px; }
-  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
-  .contact-link { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.25rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); background: white; font-size: 13px; transition: all 0.2s; }
-  .contact-link:hover { border-color: var(--pink-light); background: var(--pink-bg); }
-  .link-label { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2px; }
-  .link-value { font-weight: 400; font-size: 13px; }
-  .link-arrow { color: var(--border); font-size: 14px; transition: color 0.2s; }
-  .contact-link:hover .link-arrow { color: var(--pink); }
-  .resume-download { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.5rem; border: 1px solid var(--pink-light); border-radius: 10px; background: var(--pink-bg); text-decoration: none; color: var(--text); transition: all 0.2s; margin-top: 1rem; }
-  .resume-download:hover { background: var(--pink); color: white; border-color: var(--pink); }
-  .resume-download:hover .rd-sub, .resume-download:hover .rd-label, .resume-download:hover .rd-arrow { color: rgba(255,255,255,0.8); }
-  .rd-label { font-family: var(--mono); font-size: 10px; color: var(--pink); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; transition: color 0.2s; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.6rem; }
+  .contact-link { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.1rem; border: 1px solid var(--border); border-radius: 3px; text-decoration: none; color: var(--text); background: white; font-size: 13px; transition: all 0.15s; }
+  .contact-link:hover { border-color: var(--text); background: var(--bg2); }
+  .link-label { font-size: 10px; font-weight: 500; color: var(--subtle); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2px; }
+  .link-value { font-weight: 400; font-size: 13px; color: var(--text); }
+  .link-arrow { color: var(--subtle); font-size: 13px; transition: color 0.15s; }
+  .contact-link:hover .link-arrow { color: var(--text); }
+  .resume-download { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.4rem; border: 1px solid var(--text); border-radius: 3px; background: white; text-decoration: none; color: var(--text); transition: all 0.2s; margin-top: 1rem; }
+  .resume-download:hover { background: var(--text); color: white; }
+  .resume-download:hover .rd-sub, .resume-download:hover .rd-label { color: rgba(255,255,255,0.6); }
+  .resume-download:hover .rd-arrow { color: white; }
+  .rd-label { font-size: 9px; font-weight: 500; color: var(--subtle); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; transition: color 0.2s; }
   .rd-title { font-size: 13px; font-weight: 500; }
-  .rd-sub { font-size: 11px; color: var(--muted); margin-top: 1px; transition: color 0.2s; }
-  .rd-arrow { font-size: 18px; color: var(--pink); transition: color 0.2s; }
+  .rd-sub { font-size: 11px; color: var(--subtle); margin-top: 1px; transition: color 0.2s; }
+  .rd-arrow { font-size: 16px; transition: color 0.2s; }
 
   /* MODAL */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; align-items: center; justify-content: center; padding: 2rem; }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; align-items: center; justify-content: center; padding: 2rem; }
   .modal-overlay.open { display: flex; }
-  .modal-box { background: var(--bg); border-radius: 16px; max-width: 640px; width: 100%; max-height: 88vh; overflow-y: auto; position: relative; border: 1px solid var(--border); }
-  .modal-close { position: absolute; top: 1rem; right: 1.25rem; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted); line-height: 1; z-index: 1; transition: color 0.2s; }
+  .modal-box { background: var(--bg); border-radius: 4px; max-width: 640px; width: 100%; max-height: 88vh; overflow-y: auto; position: relative; border: 1px solid var(--border); }
+  .modal-close { position: absolute; top: 1rem; right: 1.25rem; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--subtle); line-height: 1; z-index: 1; transition: color 0.2s; }
   .modal-close:hover { color: var(--text); }
-  .modal-img { width: 100%; height: 260px; object-fit: cover; border-radius: 15px 15px 0 0; display: block; }
+  .modal-img { width: 100%; height: 260px; object-fit: cover; border-radius: 3px 3px 0 0; display: block; }
   .modal-img.hidden { display: none; }
   .modal-body { padding: 1.75rem 2rem 2rem; }
-  .modal-date { font-family: var(--mono); font-size: 11px; color: var(--pink); margin-bottom: 0.4rem; letter-spacing: 0.06em; }
-  .modal-title { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; font-style: italic; margin-bottom: 0.85rem; line-height: 1.2; }
+  .modal-date { font-size: 10px; color: var(--subtle); margin-bottom: 0.4rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .modal-title { font-size: 1.35rem; font-weight: 600; margin-bottom: 0.4rem; line-height: 1.25; color: var(--text); }
+  .modal-title-line { width: 28px; height: 2px; background: var(--magenta); margin-bottom: 1rem; }
   .modal-desc { color: var(--muted); font-size: 14px; font-weight: 300; line-height: 1.8; margin-bottom: 1.25rem; }
   .modal-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 
-  footer { border-top: 1px solid var(--border); padding: 2rem 4rem; text-align: center; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.04em; }
-
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-  .fade-in { opacity: 0; transform: translateY(10px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  footer { border-top: 1px solid var(--border); padding: 1.5rem 4rem; text-align: center; font-size: 11px; color: var(--subtle); letter-spacing: 0.04em; }
 
   @media (max-width: 700px) {
-    nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
-    #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
-    .hero-right { order: -1; display: flex; justify-content: center; }
-    .headshot-frame { width: 140px; height: 180px; }
-    section { padding: 5rem 1.5rem; }
-    .about-grid, .contact-inner, .skills-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links li:not(:last-child) { display: none; }
+    #page-home .page-inner { grid-template-columns: 1fr; padding: 2rem 1.5rem; min-height: unset; }
+    .hero-right { display: flex; justify-content: center; order: -1; }
+    .page-inner { padding: 2rem 1.5rem; }
+    .about-section { padding: 2rem 1.5rem; }
+    .about-grid, .contact-grid, .skills-grid { grid-template-columns: 1fr; }
     .project-card { grid-template-columns: 1fr; }
-    .project-img-slot { width: 100%; height: 140px; border-right: none; border-bottom: 1px solid var(--border); }
+    .project-img-slot { width: 100%; height: 130px; border-right: none; border-bottom: 1px solid var(--border); }
     .modal-overlay { padding: 1rem; }
   }
 </style>
@@ -158,229 +179,270 @@
 <body>
 
 <nav>
-  <a class="nav-logo" href="#hero">Isabella Vera</a>
+  <span class="nav-logo" onclick="showPage('home')">Isabella Vera</span>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Work</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+    <li><a onclick="showPage('work')" id="nav-work">Work</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
     <li><a href="RESUME.pdf" target="_blank" class="nav-resume">Resume ↓</a></li>
   </ul>
 </nav>
 
-<div id="hero">
-  <div class="hero-left">
-    <p class="hero-tag">Harvey Mudd College · Engineering · Class of 2028</p>
-    <h1 class="hero-name">Hi, I'm<br><em>Isabella Vera.</em></h1>
-    <p class="hero-sub">Engineer at Harvey Mudd College building embedded systems, autonomous vehicles, and hardware that solves real problems. Based in Los Angeles.</p>
-    <div class="hero-awards">
-      <span class="award-pill">President's Scholar</span>
-      <span class="award-pill">Annenberg Leadership Fellow</span>
-      <span class="award-pill">Dean's List</span>
+<!-- PAGE 1: HOME + ABOUT -->
+<div class="page active" id="page-home">
+  <div class="page-inner">
+    <div class="hero-left">
+      <p class="hero-tag">Harvey Mudd College · Engineering · Class of 2028</p>
+      <h1 class="hero-name">Isabella Vera</h1>
+      <div class="hero-name-line"></div>
+      <p class="hero-sub">Engineer at Harvey Mudd College building embedded systems, autonomous vehicles, and hardware that solves real problems. Based in Los Angeles.</p>
+      <div class="hero-awards">
+        <span class="award-pill">President's Scholar</span>
+        <span class="award-pill">Annenberg Leadership Fellow</span>
+        <span class="award-pill">Dean's List</span>
+      </div>
+      <div class="hero-cta">
+        <span onclick="showPage('work')" class="btn btn-primary">View My Work</span>
+        <span onclick="showPage('contact')" class="btn btn-outline">Say Hello</span>
+      </div>
     </div>
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">View My Work</a>
-      <a href="#contact" class="btn btn-outline">Say Hello</a>
+    <div class="hero-right">
+      <div class="headshot-frame">
+        <!-- Replace src with your headshot filename if different -->
+        <img src="IVHeadshot.jpg" alt="Isabella Vera"/>
+      </div>
     </div>
   </div>
-  <!--<div class="hero-right">
-    <div class="headshot-frame">
-      <img src="IVHeadshot.jpg" alt="Isabella Vera"/>
+
+  <div class="about-section">
+    <span class="section-label">About</span>
+    <h2 class="section-title">A little about me</h2>
+    <div class="section-title-line"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a general engineering student at Harvey Mudd College with hands-on experience across embedded firmware, circuit design, digital systems, and fabrication. I like building things that work in the real world — from underwater vehicles to RISC-V processors.</p>
+        <p>I currently develop firmware for the USDA, run weekly tutoring sessions for HMC's engineering department, and steward the Makerspace. I'm seeking internships in the LA area, particularly in aerospace, defense, and embedded systems.</p>
+        <span onclick="showPage('contact')" class="btn btn-primary" style="margin-top:0.5rem; cursor:pointer;">Open to opportunities</span>
+      </div>
+      <div>
+        <div class="detail-row"><span class="label">University</span><span class="value">Harvey Mudd College</span></div>
+        <div class="detail-row"><span class="label">Location</span><span class="value">Claremont, CA</span></div>
+        <div class="detail-row"><span class="label">Graduation</span><span class="value">May 2028</span></div>
+        <div class="detail-row"><span class="label">Degree</span><span class="value">B.S. General Engineering</span></div>
+        <div class="detail-row"><span class="label">GPA</span><span class="value">3.466 · Dean's List</span></div>
+        <div class="detail-row"><span class="label">Focus</span><span class="value">Embedded · Circuits · Digital Systems</span></div>
+      </div>
     </div>
-  </div>-->
+  </div>
+  <footer>Isabella Vera · Harvey Mudd College · General Engineering · Class of 2028</footer>
 </div>
 
-<section id="about">
-  <div class="section-header"><span class="section-label">01 · About</span><div class="section-line"></div></div>
-  <div class="about-grid fade-in">
-    <div class="about-text">
-      <h2 class="section-title">A little about me</h2>
-      <p>I'm a general engineering student at Harvey Mudd College with hands-on experience across embedded firmware, circuit design, digital systems, and fabrication. I like building things that work in the real world — from underwater vehicles to RISC-V processors.</p>
-      <p>I currently develop firmware for the USDA, run weekly tutoring sessions for HMC's engineering department, and steward the Makerspace. I'm seeking internships in the LA area, particularly in aerospace, defense, and embedded systems.</p>
-      <a href="#contact" class="btn btn-primary" style="margin-top:0.5rem;">Open to opportunities</a>
+<!-- PAGE 2: WORK -->
+<div class="page" id="page-work">
+  <div class="page-inner">
+    <span class="section-label">Work</span>
+    <h2 class="section-title">Projects & experience</h2>
+    <div class="section-title-line"></div>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('projects', this)">Projects</button>
+      <button class="tab-btn" onclick="switchTab('experience', this)">Experience</button>
     </div>
-    <div>
-      <div class="detail-row"><span class="label">University</span><span class="value">Harvey Mudd College</span></div>
-      <div class="detail-row"><span class="label">Location</span><span class="value">Claremont, CA</span></div>
-      <div class="detail-row"><span class="label">Graduation</span><span class="value">May 2028</span></div>
-      <div class="detail-row"><span class="label">Degree</span><span class="value">B.S. General Engineering</span></div>
-      <div class="detail-row"><span class="label">GPA</span><span class="value">3.466 · Dean's List</span></div>
-      <div class="detail-row"><span class="label">Focus</span><span class="value">Embedded · Circuits · Digital Systems</span></div>
+
+    <div id="tab-projects" class="tab-content active">
+      <div class="projects-grid">
+
+        <div class="project-card" onclick="openModal(0)">
+          <div class="project-img-slot">
+            <!-- To add image: set src="img/your-photo.jpg" and remove the hint divs -->
+            <img src="" alt=""/>
+            <div class="img-hint-icon">+</div>
+            <div class="img-hint">Add photo</div>
+          </div>
+          <div class="project-body">
+            <p class="project-number">01</p>
+            <p class="project-date">Feb 2026 – Present</p>
+            <h3 class="project-title">Real-Time Control System · Linear Actuator Array</h3>
+            <p class="project-desc">Microcontroller-based system converting real-time mapping sensor data into synchronized multi-channel actuator commands. Iterating on latency and spatial resolution.</p>
+            <div class="project-tags"><span class="tag">Embedded C</span><span class="tag">Microcontrollers</span><span class="tag">Real-Time</span><span class="tag">Sensors</span></div>
+            <p class="project-card-hint">Click to read more →</p>
+          </div>
+        </div>
+
+        <div class="project-card" onclick="openModal(1)">
+          <div class="project-img-slot">
+            <img src="" alt=""/>
+            <div class="img-hint-icon">+</div>
+            <div class="img-hint">Add photo</div>
+          </div>
+          <div class="project-body">
+            <p class="project-number">02</p>
+            <p class="project-date">Jan 2026 – Present</p>
+            <h3 class="project-title">Autonomous Underwater Vehicle</h3>
+            <p class="project-desc">Custom temperature, pressure, and turbidity sensor circuits on an AUV for ocean conservation. Programmed autonomous open-water traversal and return-to-launch logic.</p>
+            <div class="project-tags"><span class="tag">Circuit Design</span><span class="tag">Python</span><span class="tag">Autonomous</span><span class="tag">Sensors</span></div>
+            <p class="project-card-hint">Click to read more →</p>
+          </div>
+        </div>
+
+        <div class="project-card" onclick="openModal(2)">
+          <div class="project-img-slot">
+            <img src="" alt=""/>
+            <div class="img-hint-icon">+</div>
+            <div class="img-hint">Add photo</div>
+          </div>
+          <div class="project-body">
+            <p class="project-number">03</p>
+            <p class="project-date">Nov – Dec 2025</p>
+            <h3 class="project-title">RISC-V Multi-Cycle Processor</h3>
+            <p class="project-desc">Built and debugged a multi-cycle digital system with centralized control, shared memory, and staged execution in SystemVerilog. Verified via waveform debugging and testbenches.</p>
+            <div class="project-tags"><span class="tag">SystemVerilog</span><span class="tag">RISC-V</span><span class="tag">Digital Design</span></div>
+            <p class="project-card-hint">Click to read more →</p>
+          </div>
+        </div>
+
+        <div class="project-card" onclick="openModal(3)">
+          <div class="project-img-slot">
+            <img src="" alt=""/>
+            <div class="img-hint-icon">+</div>
+            <div class="img-hint">Add photo</div>
+          </div>
+          <div class="project-body">
+            <p class="project-number">04</p>
+            <p class="project-date">Mar – May 2025</p>
+            <h3 class="project-title">Logic Gate Demonstration Board</h3>
+            <p class="project-desc">Led a team of 5 to design and fabricate a demo board now used by 100+ students per semester. Built using laser cutters, 3D printers, and integrated circuits.</p>
+            <div class="project-tags"><span class="tag">Team Lead</span><span class="tag">PCB</span><span class="tag">Fabrication</span><span class="tag">Digital Logic</span></div>
+            <p class="project-card-hint">Click to read more →</p>
+          </div>
+        </div>
+
+        <div class="project-card" onclick="openModal(4)">
+          <div class="project-img-slot">
+            <img src="" alt=""/>
+            <div class="img-hint-icon">+</div>
+            <div class="img-hint">Add photo</div>
+          </div>
+          <div class="project-body">
+            <p class="project-number">05</p>
+            <p class="project-date">Dec 2024 – Feb 2025</p>
+            <h3 class="project-title">Code the Change · Museum of Science Website</h3>
+            <p class="project-desc">Launched a website for Boston's Museum of Science and MIT's Jameel Clinic to educate global audiences on clinical AI, with a team of 5 students.</p>
+            <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Team Collab</span></div>
+            <p class="project-card-hint">Click to read more →</p>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
-</section>
 
-<section id="projects">
-  <div class="section-header"><span class="section-label">02 · Work</span><div class="section-line"></div></div>
-  <h2 class="section-title fade-in">Projects & experience</h2>
-  <div class="tab-bar fade-in">
-    <button class="tab-btn active" onclick="switchTab('projects', this)">Projects</button>
-    <button class="tab-btn" onclick="switchTab('experience', this)">Experience</button>
-  </div>
-
-  <div id="tab-projects" class="tab-content active fade-in">
-    <div class="projects-grid">
-
-      <div class="project-card" onclick="openModal(0)">
-        <div class="project-body">
-          <p class="project-number">01</p>
-          <p class="project-date">Feb 2026 – Present</p>
-          <h3 class="project-title">Real-Time Control System · Linear Actuator Array</h3>
-          <p class="project-desc">Microcontroller-based system converting real-time mapping sensor data into synchronized multi-channel actuator commands. Iterating on latency and spatial resolution.</p>
-          <div class="project-tags"><span class="tag">Embedded C</span><span class="tag">Microcontrollers</span><span class="tag">Real-Time</span><span class="tag">Sensors</span></div>
-          <p class="project-card-hint">Click to read more →</p>
+    <div id="tab-experience" class="tab-content">
+      <div class="exp-list">
+        <div class="exp-card">
+          <div class="exp-header"><h3 class="exp-title">Electropenetography Firmware Developer</h3><span class="exp-date">Mar 2026 – Present</span></div>
+          <p class="exp-org">USDA</p>
+          <ul class="exp-bullets"><li>Develop microcontroller firmware and Python software to acquire, process, and visualize high-sensitivity analog signals from insect feeding experiments</li></ul>
+        </div>
+        <div class="exp-card">
+          <div class="exp-header"><h3 class="exp-title">Engineering Grader & Tutor</h3><span class="exp-date">Jan 2026 – Present</span></div>
+          <p class="exp-org">Harvey Mudd College Engineering Dept.</p>
+          <ul class="exp-bullets"><li>Conduct weekly office hours to assist students with homework and hands-on lab assignments</li></ul>
+        </div>
+        <div class="exp-card">
+          <div class="exp-header"><h3 class="exp-title">Makerspace Steward</h3><span class="exp-date">Jan 2025 – Present</span></div>
+          <p class="exp-org">Harvey Mudd College</p>
+          <ul class="exp-bullets">
+            <li>Lead biweekly trainings on waterjet cutter operation and safety</li>
+            <li>Manage electronics inventory for accessible, well-stocked workspace</li>
+            <li>Built a Google Apps Script budget analysis tool managing a six-figure yearly budget</li>
+          </ul>
+        </div>
+        <div class="exp-card">
+          <div class="exp-header"><h3 class="exp-title">Lead STEM Tutor</h3><span class="exp-date">Jun – Aug 2024</span></div>
+          <p class="exp-org">Partnership for Success</p>
+          <ul class="exp-bullets"><li>Taught engineering and design thinking to 30 girls from underrepresented communities</li></ul>
         </div>
       </div>
-
-      <div class="project-card" onclick="openModal(1)">
-        <div class="project-body">
-          <p class="project-number">02</p>
-          <p class="project-date">Jan 2026 – Present</p>
-          <h3 class="project-title">Autonomous Underwater Vehicle</h3>
-          <p class="project-desc">Custom temperature, pressure, and turbidity sensor circuits on an AUV for ocean conservation. Programmed autonomous open-water traversal and return-to-launch logic.</p>
-          <div class="project-tags"><span class="tag">Circuit Design</span><span class="tag">Python</span><span class="tag">Autonomous</span><span class="tag">Sensors</span></div>
-          <p class="project-card-hint">Click to read more →</p>
-        </div>
-      </div>
-
-      <div class="project-card" onclick="openModal(2)">
-        <div class="project-body">
-          <p class="project-number">03</p>
-          <p class="project-date">Nov – Dec 2025</p>
-          <h3 class="project-title">RISC-V Multi-Cycle Processor</h3>
-          <p class="project-desc">Built and debugged a multi-cycle digital system with centralized control, shared memory, and staged execution in SystemVerilog. Verified via waveform debugging and testbenches.</p>
-          <div class="project-tags"><span class="tag">SystemVerilog</span><span class="tag">RISC-V</span><span class="tag">Digital Design</span></div>
-          <p class="project-card-hint">Click to read more →</p>
-        </div>
-      </div>
-
-      <div class="project-card" onclick="openModal(3)">
-        <div class="project-body">
-          <p class="project-number">04</p>
-          <p class="project-date">Mar – May 2025</p>
-          <h3 class="project-title">Logic Gate Demonstration Board</h3>
-          <p class="project-desc">Led a team of 5 to design and fabricate a demo board now used by 100+ students per semester. Built using laser cutters, 3D printers, and integrated circuits.</p>
-          <div class="project-tags"><span class="tag">Team Lead</span><span class="tag">PCB</span><span class="tag">Fabrication</span><span class="tag">Digital Logic</span></div>
-          <p class="project-card-hint">Click to read more →</p>
-        </div>
-      </div>
-
-      <div class="project-card" onclick="openModal(4)">
-        <div class="project-body">
-          <p class="project-number">05</p>
-          <p class="project-date">Dec 2024 – Feb 2025</p>
-          <h3 class="project-title">Code the Change · Museum of Science Website</h3>
-          <p class="project-desc">Launched a website for Boston's Museum of Science and MIT's Jameel Clinic to educate global audiences on clinical AI, with a team of 5 students.</p>
-          <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Team Collab</span></div>
-          <p class="project-card-hint">Click to read more →</p>
-        </div>
-      </div>
-
     </div>
-  </div>
 
-  <div id="tab-experience" class="tab-content">
-    <div class="exp-list">
-      <div class="exp-card">
-        <div class="exp-header"><h3 class="exp-title">Electropenetography Firmware Developer</h3><span class="exp-date">Mar 2026 – Present</span></div>
-        <p class="exp-org">USDA</p>
-        <ul class="exp-bullets"><li>Develop microcontroller firmware and Python software to acquire, process, and visualize high-sensitivity analog signals from insect feeding experiments</li></ul>
+    <div class="skills-header">
+      <span class="section-label">Skills</span>
+      <h2 class="section-title">Technical toolkit</h2>
+      <div class="section-title-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <p class="skill-group-title">Programming</p>
+        <div class="skill-list">
+          <div class="skill-item"><div class="skill-dot"></div>Python</div>
+          <div class="skill-item"><div class="skill-dot"></div>C / Embedded C</div>
+          <div class="skill-item"><div class="skill-dot"></div>SystemVerilog</div>
+          <div class="skill-item"><div class="skill-dot"></div>JavaScript / HTML / CSS</div>
+          <div class="skill-item"><div class="skill-dot"></div>Java · C# · Racket</div>
+        </div>
       </div>
-      <div class="exp-card">
-        <div class="exp-header"><h3 class="exp-title">Engineering Grader & Tutor</h3><span class="exp-date">Jan 2026 – Present</span></div>
-        <p class="exp-org">Harvey Mudd College Engineering Dept.</p>
-        <ul class="exp-bullets"><li>Conduct weekly office hours to assist students with homework and hands-on lab assignments</li></ul>
+      <div class="skill-group">
+        <p class="skill-group-title">Hardware & Fabrication</p>
+        <div class="skill-list">
+          <div class="skill-item"><div class="skill-dot"></div>Circuit Design & Analysis</div>
+          <div class="skill-item"><div class="skill-dot"></div>Soldering & Electronics Test</div>
+          <div class="skill-item"><div class="skill-dot"></div>SolidWorks / 3D Printing</div>
+          <div class="skill-item"><div class="skill-dot"></div>Waterjet · Lathe · Mill</div>
+          <div class="skill-item"><div class="skill-dot"></div>Microcontroller Firmware</div>
+        </div>
       </div>
-      <div class="exp-card">
-        <div class="exp-header"><h3 class="exp-title">Makerspace Steward</h3><span class="exp-date">Jan 2025 – Present</span></div>
-        <p class="exp-org">Harvey Mudd College</p>
-        <ul class="exp-bullets">
-          <li>Lead biweekly trainings on waterjet cutter operation and safety</li>
-          <li>Manage electronics inventory for accessible, well-stocked workspace</li>
-          <li>Built a Google Apps Script budget analysis tool managing a six-figure yearly budget</li>
-        </ul>
-      </div>
-      <div class="exp-card">
-        <div class="exp-header"><h3 class="exp-title">Lead STEM Tutor</h3><span class="exp-date">Jun – Aug 2024</span></div>
-        <p class="exp-org">Partnership for Success</p>
-        <ul class="exp-bullets"><li>Taught engineering and design thinking to 30 girls from underrepresented communities</li></ul>
+      <div class="skill-group">
+        <p class="skill-group-title">Coursework</p>
+        <div class="skill-list">
+          <div class="skill-item"><div class="skill-dot"></div>Digital Electronics & CE</div>
+          <div class="skill-item"><div class="skill-dot"></div>Electronic & Magnetic Circuits</div>
+          <div class="skill-item"><div class="skill-dot"></div>Engineering Design & Mfg</div>
+          <div class="skill-item"><div class="skill-dot"></div>Experimental Engineering</div>
+        </div>
       </div>
     </div>
   </div>
-</section>
+  <footer>Isabella Vera · Harvey Mudd College · General Engineering · Class of 2028</footer>
+</div>
 
-<section id="skills">
-  <div class="section-header"><span class="section-label">03 · Skills</span><div class="section-line"></div></div>
-  <h2 class="section-title fade-in">Technical toolkit</h2>
-  <div class="skills-grid fade-in">
-    <div class="skill-group">
-      <p class="skill-group-title">Programming</p>
-      <div class="skill-list">
-        <div class="skill-item"><div class="skill-dot"></div>Python</div>
-        <div class="skill-item"><div class="skill-dot"></div>C / Embedded C</div>
-        <div class="skill-item"><div class="skill-dot"></div>SystemVerilog</div>
-        <div class="skill-item"><div class="skill-dot"></div>JavaScript / HTML / CSS</div>
-        <div class="skill-item"><div class="skill-dot"></div>Java · C# · Racket</div>
+<!-- PAGE 3: CONTACT -->
+<div class="page" id="page-contact">
+  <div class="page-inner">
+    <span class="section-label">Contact</span>
+    <h2 class="section-title">Let's connect</h2>
+    <div class="section-title-line"></div>
+    <div class="contact-grid">
+      <div class="contact-text">
+        <p>I'm looking for summer internship opportunities in the LA area — embedded systems, aerospace, and defense are my top interests.</p>
+        <p>Whether it's an opportunity, a collab, or just to talk engineering — I'd love to hear from you.</p>
+        <a href="mailto:ivera@g.hmc.edu" class="btn btn-primary" style="margin-top:0.5rem;">Send a message</a>
+        <!-- Replace href with your hosted PDF link -->
+        <a href="RESUME.pdf" class="resume-download" target="_blank">
+          <div><p class="rd-label">Download</p><p class="rd-title">My Resume</p><p class="rd-sub">PDF · Updated March 2026</p></div>
+          <span class="rd-arrow">↓</span>
+        </a>
       </div>
-    </div>
-    <div class="skill-group">
-      <p class="skill-group-title">Hardware & Fabrication</p>
-      <div class="skill-list">
-        <div class="skill-item"><div class="skill-dot"></div>Circuit Design & Analysis</div>
-        <div class="skill-item"><div class="skill-dot"></div>Soldering & Electronics Test</div>
-        <div class="skill-item"><div class="skill-dot"></div>SolidWorks / 3D Printing</div>
-        <div class="skill-item"><div class="skill-dot"></div>Waterjet · Lathe · Mill</div>
-        <div class="skill-item"><div class="skill-dot"></div>Microcontroller Firmware</div>
-      </div>
-    </div>
-    <div class="skill-group">
-      <p class="skill-group-title">Coursework</p>
-      <div class="skill-list">
-        <div class="skill-item"><div class="skill-dot"></div>Digital Electronics & CE</div>
-        <div class="skill-item"><div class="skill-dot"></div>Electronic & Magnetic Circuits</div>
-        <div class="skill-item"><div class="skill-dot"></div>Engineering Design & Mfg</div>
-        <div class="skill-item"><div class="skill-dot"></div>Experimental Engineering</div>
+      <div class="contact-links">
+        <a href="mailto:ivera@g.hmc.edu" class="contact-link">
+          <div><p class="link-label">Email</p><p class="link-value">ivera@g.hmc.edu</p></div>
+          <span class="link-arrow">↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/isabellavera/" class="contact-link" target="_blank">
+          <div><p class="link-label">LinkedIn</p><p class="link-value">/in/isabellavera</p></div>
+          <span class="link-arrow">↗</span>
+        </a>
+        <!-- Update href to your real GitHub URL -->
+        <a href="https://github.com/isabella-vera" class="contact-link" target="_blank">
+          <div><p class="link-label">GitHub</p><p class="link-value">github.com/isabella-vera</p></div>
+          <span class="link-arrow">↗</span>
+        </a>
       </div>
     </div>
   </div>
-</section>
+  <footer>Isabella Vera · Harvey Mudd College · General Engineering · Class of 2028</footer>
+</div>
 
-<section id="contact">
-  <div class="section-header"><span class="section-label">04 · Contact</span><div class="section-line"></div></div>
-  <div class="contact-inner fade-in">
-    <div class="contact-text">
-      <h2 class="section-title">Let's connect</h2>
-      <p>I'm looking for summer internship opportunities in the LA area — embedded systems, aerospace, and defense are my top interests.</p>
-      <p>Whether it's an opportunity, a collab, or just to talk engineering — I'd love to hear from you.</p>
-      <a href="RESUME.pdf" class="resume-download" target="_blank">
-        <div>
-          <p class="rd-label">Download</p>
-          <p class="rd-title">My Resume</p>
-          <p class="rd-sub">PDF · Updated March 2026</p>
-        </div>
-        <span class="rd-arrow">↓</span>
-      </a>
-    </div>
-    <div class="contact-links">
-      <a href="mailto:ivera@g.hmc.edu" class="contact-link">
-        <div><p class="link-label">Email</p><p class="link-value">ivera@g.hmc.edu</p></div>
-        <span class="link-arrow">↗</span>
-      </a>
-      <a href="https://www.linkedin.com/in/isabellavera/" class="contact-link" target="_blank">
-        <div><p class="link-label">LinkedIn</p><p class="link-value">/in/isabellavera</p></div>
-        <span class="link-arrow">↗</span>
-      </a>
-      <a href="https://github.com/isabella-vera" class="contact-link" target="_blank">
-        <div><p class="link-label">GitHub</p><p class="link-value">github.com/isabella-vera</p></div>
-        <span class="link-arrow">↗</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer>Isabella Vera · Harvey Mudd College · General Engineering · Class of 2028</footer>
-
-<!-- MODAL — lives here, inside body, after all content -->
+<!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
   <div class="modal-box" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeModal()">×</button>
@@ -388,6 +450,7 @@
     <div class="modal-body">
       <p class="modal-date" id="modal-date"></p>
       <h2 class="modal-title" id="modal-title"></h2>
+      <div class="modal-title-line"></div>
       <p class="modal-desc" id="modal-desc"></p>
       <div class="modal-tags" id="modal-tags"></div>
     </div>
@@ -418,14 +481,14 @@ const projects = [
     title: "RISC-V Multi-Cycle Processor",
     date: "Nov – Dec 2025",
     img: "",
-    desc: "Built and debugged a multi-cycle digital system with centralized control, shared memory, and staged execution, emphasizing system reliability and correct sequencing of operations using SystemVerilog. Verified correct system behavior through waveform-based debugging and testbench-driven validation.",
+    desc: "Built and debugged a multi-cycle digital system with centralized control, shared memory, and staged execution using SystemVerilog. Verified correct behavior through waveform-based debugging and testbench-driven validation.",
     tags: ["SystemVerilog", "RISC-V", "Digital Design"]
   },
   {
     title: "Logic Gate Demonstration Board",
     date: "Mar – May 2025",
     img: "",
-    desc: "Headed a team of 5 students in designing a demonstration board to teach functions of basic logic gates. Fabricated a functioning prototype using laser cutters, 3D printers, and integrated circuits — now used to help over a hundred students each semester understand the material.",
+    desc: "Headed a team of 5 students in designing a demonstration board to teach functions of basic logic gates. Fabricated a functioning prototype using laser cutters, 3D printers, and integrated circuits — now used by 100+ students each semester.",
     tags: ["Team Lead", "PCB", "Fabrication", "Digital Logic"]
   },
   {
@@ -437,23 +500,26 @@ const projects = [
   }
 ];
 
+// ── Page navigation ───────────────────────────────────────────────────────────
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a[id]').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
 // ── Modal ─────────────────────────────────────────────────────────────────────
 function openModal(i) {
   const p = projects[i];
   const img = document.getElementById('modal-img');
-  if (p.img) {
-    img.src = p.img;
-    img.classList.remove('hidden');
-  } else {
-    img.src = '';
-    img.classList.add('hidden');
-  }
+  if (p.img) { img.src = p.img; img.classList.remove('hidden'); }
+  else { img.src = ''; img.classList.add('hidden'); }
   document.getElementById('modal-date').textContent = p.date;
   document.getElementById('modal-title').textContent = p.title;
   document.getElementById('modal-desc').textContent = p.desc;
-  document.getElementById('modal-tags').innerHTML = p.tags
-    .map(t => `<span class="tag">${t}</span>`)
-    .join('');
+  document.getElementById('modal-tags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -472,14 +538,6 @@ function switchTab(tab, btn) {
   document.getElementById('tab-' + tab).classList.add('active');
   btn.classList.add('active');
 }
-
-// ── Scroll animations ─────────────────────────────────────────────────────────
-const els = document.querySelectorAll('.fade-in');
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
-els.forEach(el => obs.observe(el));
-setTimeout(() => { els.forEach(el => el.classList.add('visible')); }, 1000);
 </script>
 </body>
 </html>
