@@ -87,7 +87,7 @@
   .tab-content { display: none; }
   .tab-content.active { display: block; }
 
-  .projects-grid { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .projects-grid { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 3rem; }
   .project-card { background: white; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 150px 1fr; transition: background 0.15s; cursor: pointer; }
   .project-card:last-child { border-bottom: none; }
   .project-card:hover { background: var(--bg2); }
@@ -105,7 +105,7 @@
   .tag { font-size: 10px; font-weight: 400; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); padding: 1px 7px; border-radius: 2px; }
   .project-card-hint { font-size: 10px; color: var(--subtle); margin-top: 0.5rem; }
 
-  .exp-list { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .exp-list { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 3rem; }
   .exp-card { padding: 1.4rem 1.75rem; background: white; border-bottom: 1px solid var(--border); transition: background 0.15s; }
   .exp-card:last-child { border-bottom: none; }
   .exp-card:hover { background: var(--bg2); }
@@ -248,17 +248,17 @@
     <div id="tab-experience" class="tab-content active">
       <div class="exp-list">
         <div class="exp-card">
-          <div class="exp-header"><h3 class="exp-title">Electropenetography Firmware Developer</h3><span class="exp-date">Mar 2026 – Present</span></div>
+          <div class="exp-header"><h3 class="exp-title">Electropenetography Firmware Developer</h3><span class="exp-date">March 2026 – Present</span></div>
           <p class="exp-org">USDA</p>
           <ul class="exp-bullets"><li>Develop microcontroller firmware and Python software to acquire, process, and visualize high-sensitivity analog signals from insect feeding experiments</li></ul>
         </div>
         <div class="exp-card">
-          <div class="exp-header"><h3 class="exp-title">Engineering Grader & Tutor</h3><span class="exp-date">Jan 2026 – Present</span></div>
+          <div class="exp-header"><h3 class="exp-title">Engineering Grader & Tutor</h3><span class="exp-date">January 2026 – Present</span></div>
           <p class="exp-org">Harvey Mudd College Engineering Dept.</p>
           <ul class="exp-bullets"><li>Conduct weekly office hours to assist students with homework and hands-on lab assignments</li></ul>
         </div>
         <div class="exp-card">
-          <div class="exp-header"><h3 class="exp-title">Makerspace Steward</h3><span class="exp-date">Jan 2025 – Present</span></div>
+          <div class="exp-header"><h3 class="exp-title">Makerspace Steward</h3><span class="exp-date">January 2025 – Present</span></div>
           <p class="exp-org">Harvey Mudd College</p>
           <ul class="exp-bullets">
             <li>Lead biweekly trainings on waterjet cutter operation and safety</li>
@@ -267,7 +267,7 @@
           </ul>
         </div>
         <div class="exp-card">
-          <div class="exp-header"><h3 class="exp-title">Lead STEM Tutor</h3><span class="exp-date">Jun – Aug 2024</span></div>
+          <div class="exp-header"><h3 class="exp-title">Lead STEM Tutor</h3><span class="exp-date">June – August 2024</span></div>
           <p class="exp-org">Partnership for Success</p>
           <ul class="exp-bullets"><li>Taught engineering and design thinking to 30 girls from underrepresented communities</li></ul>
         </div>
@@ -328,12 +328,9 @@
           <div class="project-img-slot">
             <!-- To add image: set src="img/your-photo.jpg" and remove the hint divs -->
             <img src="" alt=""/>
-            <div class="img-hint-icon">+</div>
-            <div class="img-hint">Add photo</div>
           </div>
           <div class="project-body">
-            <p class="project-number">01</p>
-            <p class="project-date">Feb 2026 – Present</p>
+            <p class="project-date">February 2026 – Present</p>
             <h3 class="project-title">Real-Time Control System · Linear Actuator Array</h3>
             <p class="project-desc">Microcontroller-based system converting real-time mapping sensor data into synchronized multi-channel actuator commands. Iterating on latency and spatial resolution.</p>
             <div class="project-tags"><span class="tag">Embedded C</span><span class="tag">Microcontrollers</span><span class="tag">Real-Time</span><span class="tag">Sensors</span></div>
@@ -344,12 +341,9 @@
         <div class="project-card" onclick="openModal(1)">
           <div class="project-img-slot">
             <img src="" alt=""/>
-            <div class="img-hint-icon">+</div>
-            <div class="img-hint">Add photo</div>
           </div>
           <div class="project-body">
-            <p class="project-number">02</p>
-            <p class="project-date">Jan 2026 – Present</p>
+            <p class="project-date">January 2026 – Present</p>
             <h3 class="project-title">Autonomous Underwater Vehicle</h3>
             <p class="project-desc">Custom temperature, pressure, and turbidity sensor circuits on an AUV for ocean conservation. Programmed autonomous open-water traversal and return-to-launch logic.</p>
             <div class="project-tags"><span class="tag">Circuit Design</span><span class="tag">Python</span><span class="tag">Autonomous</span><span class="tag">Sensors</span></div>
@@ -360,12 +354,9 @@
         <div class="project-card" onclick="openModal(2)">
           <div class="project-img-slot">
             <img src="" alt=""/>
-            <div class="img-hint-icon">+</div>
-            <div class="img-hint">Add photo</div>
           </div>
           <div class="project-body">
-            <p class="project-number">03</p>
-            <p class="project-date">Nov – Dec 2025</p>
+            <p class="project-date">November – December 2025</p>
             <h3 class="project-title">RISC-V Multi-Cycle Processor</h3>
             <p class="project-desc">Built and debugged a multi-cycle digital system with centralized control, shared memory, and staged execution in SystemVerilog. Verified via waveform debugging and testbenches.</p>
             <div class="project-tags"><span class="tag">SystemVerilog</span><span class="tag">RISC-V</span><span class="tag">Digital Design</span></div>
@@ -376,12 +367,9 @@
         <div class="project-card" onclick="openModal(3)">
           <div class="project-img-slot">
             <img src="" alt=""/>
-            <div class="img-hint-icon">+</div>
-            <div class="img-hint">Add photo</div>
           </div>
           <div class="project-body">
-            <p class="project-number">04</p>
-            <p class="project-date">Mar – May 2025</p>
+            <p class="project-date">March – May 2025</p>
             <h3 class="project-title">Logic Gate Demonstration Board</h3>
             <p class="project-desc">Led a team of 5 to design and fabricate a demo board now used by 100+ students per semester. Built using laser cutters, 3D printers, and integrated circuits.</p>
             <div class="project-tags"><span class="tag">Team Lead</span><span class="tag">PCB</span><span class="tag">Fabrication</span><span class="tag">Digital Logic</span></div>
@@ -392,12 +380,9 @@
         <div class="project-card" onclick="openModal(4)">
           <div class="project-img-slot">
             <img src="" alt=""/>
-            <div class="img-hint-icon">+</div>
-            <div class="img-hint">Add photo</div>
           </div>
           <div class="project-body">
-            <p class="project-number">05</p>
-            <p class="project-date">Dec 2024 – Feb 2025</p>
+            <p class="project-date">December 2024 – February 2025</p>
             <h3 class="project-title">Code the Change · Museum of Science Website</h3>
             <p class="project-desc">Launched a website for Boston's Museum of Science and MIT's Jameel Clinic to educate global audiences on clinical AI, with a team of 5 students.</p>
             <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Team Collab</span></div>
@@ -471,35 +456,35 @@
 const projects = [
   {
     title: "Real-Time Control System · Linear Actuator Array",
-    date: "Feb 2026 – Present",
+    date: "February 2026 – Present",
     img: "",
     desc: "Designing and implementing a microcontroller-based control system to convert real-time mapping sensor data into synchronized multi-channel actuator commands. Testing and iterating on system performance to reduce latency and improve spatial resolution.",
     tags: ["Embedded C", "Microcontrollers", "Real-Time", "Sensors"]
   },
   {
     title: "Autonomous Underwater Vehicle",
-    date: "Jan 2026 – Present",
+    date: "January 2026 – Present",
     img: "",
     desc: "Designing and implementing custom temperature, pressure, and turbidity sensor circuits on an AUV to facilitate ocean conservation data collection. Programming AUV to traverse open water to collect data without human intervention, and return to launch point.",
     tags: ["Circuit Design", "Python", "Autonomous", "Sensors"]
   },
   {
     title: "RISC-V Multi-Cycle Processor",
-    date: "Nov – Dec 2025",
+    date: "November – December 2025",
     img: "",
     desc: "Built and debugged a multi-cycle digital system with centralized control, shared memory, and staged execution using SystemVerilog. Verified correct behavior through waveform-based debugging and testbench-driven validation.",
     tags: ["SystemVerilog", "RISC-V", "Digital Design"]
   },
   {
     title: "Logic Gate Demonstration Board",
-    date: "Mar – May 2025",
+    date: "March – May 2025",
     img: "",
     desc: "Headed a team of 5 students in designing a demonstration board to teach functions of basic logic gates. Fabricated a functioning prototype using laser cutters, 3D printers, and integrated circuits — now used by 100+ students each semester.",
     tags: ["Team Lead", "PCB", "Fabrication", "Digital Logic"]
   },
   {
     title: "Code the Change · Museum of Science Website",
-    date: "Dec 2024 – Feb 2025",
+    date: "December 2024 – February 2025",
     img: "",
     desc: "Collaborated with a team of 4 other students to launch a website for Boston's Museum of Science and MIT's Jameel Clinic to educate global audiences on clinical artificial intelligence.",
     tags: ["JavaScript", "HTML/CSS", "Team Collab"]
