@@ -88,7 +88,7 @@
   .tab-content.active { display: block; }
 
   .projects-grid { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 3rem; }
-  .project-card { background: white; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 150px 1fr; transition: background 0.15s; cursor: pointer; }
+  .project-card { background: white; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr; transition: background 0.15s; cursor: pointer; }
   .project-card:last-child { border-bottom: none; }
   .project-card:hover { background: var(--bg2); }
   .project-img-slot { width: 150px; height: 120px; background: var(--bg); border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.3rem; position: relative; overflow: hidden; flex-shrink: 0; }
@@ -96,7 +96,7 @@
   .project-img-slot img[src=""] { display: none; }
   .img-hint { font-size: 9px; color: var(--subtle); text-align: center; line-height: 1.5; }
   .img-hint-icon { font-size: 14px; opacity: 0.3; color: var(--subtle); }
-  .project-body { padding: 1.1rem 1.4rem; display: flex; flex-direction: column; }
+  .project-body { padding: 1.1rem 1.4rem 1.1rem 3rem; display: flex; flex-direction: column; }
   .project-number { font-size: 10px; color: var(--subtle); letter-spacing: 0.06em; margin-bottom: 0.15rem; }
   .project-date { font-size: 10px; color: var(--subtle); margin-bottom: 0.35rem; }
   .project-title { font-size: 14px; font-weight: 500; margin-bottom: 0.3rem; color: var(--text); }
@@ -171,7 +171,6 @@
     .about-section { padding: 2rem 1.5rem; }
     .about-grid, .contact-grid, .skills-grid { grid-template-columns: 1fr; }
     .project-card { grid-template-columns: 1fr; }
-    .project-img-slot { width: 100%; height: 130px; border-right: none; border-bottom: 1px solid var(--border); }
     .modal-overlay { padding: 1rem; }
   }
 </style>
@@ -325,10 +324,6 @@
       <div class="projects-grid">
 
         <div class="project-card" onclick="openModal(0)">
-          <div class="project-img-slot">
-            <!-- To add image: set src="img/your-photo.jpg" and remove the hint divs -->
-            <img src="" alt=""/>
-          </div>
           <div class="project-body">
             <p class="project-date">February 2026 – Present</p>
             <h3 class="project-title">Real-Time Control System · Linear Actuator Array</h3>
@@ -339,9 +334,6 @@
         </div>
 
         <div class="project-card" onclick="openModal(1)">
-          <div class="project-img-slot">
-            <img src="" alt=""/>
-          </div>
           <div class="project-body">
             <p class="project-date">January 2026 – Present</p>
             <h3 class="project-title">Autonomous Underwater Vehicle</h3>
@@ -352,9 +344,6 @@
         </div>
 
         <div class="project-card" onclick="openModal(2)">
-          <div class="project-img-slot">
-            <img src="" alt=""/>
-          </div>
           <div class="project-body">
             <p class="project-date">November – December 2025</p>
             <h3 class="project-title">RISC-V Multi-Cycle Processor</h3>
@@ -365,9 +354,6 @@
         </div>
 
         <div class="project-card" onclick="openModal(3)">
-          <div class="project-img-slot">
-            <img src="" alt=""/>
-          </div>
           <div class="project-body">
             <p class="project-date">March – May 2025</p>
             <h3 class="project-title">Logic Gate Demonstration Board</h3>
@@ -378,9 +364,6 @@
         </div>
 
         <div class="project-card" onclick="openModal(4)">
-          <div class="project-img-slot">
-            <img src="" alt=""/>
-          </div>
           <div class="project-body">
             <p class="project-date">December 2024 – February 2025</p>
             <h3 class="project-title">Code the Change · Museum of Science Website</h3>
