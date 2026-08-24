@@ -61,6 +61,20 @@ body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neu
 .entry-description { font-size: 14.5px; line-height: 1.65; color: #333; margin: 0; }
 .entry-bullets { margin: 0; padding-left: 18px; }
 .entry-bullets li { font-size: 14.5px; line-height: 1.55; margin-bottom: 6px; }
+.entry-images { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.entry-thumb { width: 84px; height: 84px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.entry-thumb:hover { transform: scale(1.04); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+
+/* Lightbox */
+.lightbox-overlay { position: fixed; inset: 0; background: rgba(10,10,10,0.92); display: none; align-items: center; justify-content: center; z-index: 1000; }
+.lightbox-overlay.active { display: flex; }
+.lightbox-img { max-width: 88vw; max-height: 82vh; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); cursor: default; }
+.lightbox-close { position: absolute; top: 24px; right: 32px; background: none; border: none; color: #fff; font-size: 32px; line-height: 1; cursor: pointer; }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.12); border: none; color: #fff; width: 48px; height: 48px; border-radius: 50%; font-size: 20px; cursor: pointer; align-items: center; justify-content: center; display: flex; }
+.lightbox-nav:hover { background: rgba(255,255,255,0.24); }
+.lightbox-prev { left: 24px; }
+.lightbox-next { right: 24px; }
+.lightbox-counter { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: #ddd; font-size: 13px; letter-spacing: 0.05em; }
 
 @media (max-width: 760px) {
   .hero { flex-direction: column-reverse; padding-top: 48px; }
@@ -144,6 +158,10 @@ body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neu
       <h3 class="entry-title">Autonomous Underwater Vehicle, Team Lead</h3>
       <p class="entry-meta">Harvey Mudd College &middot; Claremont, CA &middot; Jan 2026 – May 2026</p>
       <p class="entry-description">I led a team of four students in designing and building an autonomous underwater vehicle for ocean data collection. We built custom temperature, pressure, and pH sensors, then I wrote the C++ control code that let the sub navigate to target depths on its own. After each deployment, I used MATLAB to turn the raw sensor data into clear visuals of the ocean conditions we recorded.</p>
+      <div class="entry-images">
+        <img class="entry-thumb" src="https://drive.google.com/thumbnail?id=1gJxEy3KUyBI-Vdw61zddLO93zCGX0XuX&amp;sz=w1000" alt="Autonomous Underwater Vehicle, Team Lead photo 1" onclick="openLightbox('projects-0', 0)">
+        <img class="entry-thumb" src="https://drive.google.com/thumbnail?id=1MuaNXRUdj9QlbkKETurmuRn1wsISY5uk&amp;sz=w1000" alt="Autonomous Underwater Vehicle, Team Lead photo 2" onclick="openLightbox('projects-0', 1)">
+      </div>
     </div>
     <div class="entry card">
       <h3 class="entry-title">RISC-V Multi-cycle Processor</h3>
@@ -176,5 +194,51 @@ body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neu
       </div>
     </section>
   </main>
+
+  <div class="lightbox-overlay" id="lightbox-overlay" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="lightboxStep(event,-1)" aria-label="Previous image">&#8592;</button>
+    <img class="lightbox-img" id="lightbox-img" onclick="event.stopPropagation()">
+    <button class="lightbox-nav lightbox-next" onclick="lightboxStep(event,1)" aria-label="Next image">&#8594;</button>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+  </div>
+
+  <script>
+    const GALLERY = {"projects-0":["https://drive.google.com/thumbnail?id=1gJxEy3KUyBI-Vdw61zddLO93zCGX0XuX&sz=w1000","https://drive.google.com/thumbnail?id=1MuaNXRUdj9QlbkKETurmuRn1wsISY5uk&sz=w1000"]};
+    let lbKey = null;
+    let lbIdx = 0;
+
+    function openLightbox(key, idx) {
+      lbKey = key;
+      lbIdx = idx;
+      updateLightbox();
+      document.getElementById('lightbox-overlay').classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox-overlay').classList.remove('active');
+    }
+    function updateLightbox() {
+      const imgs = GALLERY[lbKey] || [];
+      if (!imgs.length) return;
+      document.getElementById('lightbox-img').src = imgs[lbIdx];
+      document.getElementById('lightbox-counter').textContent = (lbIdx + 1) + ' / ' + imgs.length;
+      const multi = imgs.length > 1;
+      document.querySelector('.lightbox-prev').style.display = multi ? 'flex' : 'none';
+      document.querySelector('.lightbox-next').style.display = multi ? 'flex' : 'none';
+    }
+    function lightboxStep(e, dir) {
+      e.stopPropagation();
+      const imgs = GALLERY[lbKey] || [];
+      if (!imgs.length) return;
+      lbIdx = (lbIdx + dir + imgs.length) % imgs.length;
+      updateLightbox();
+    }
+    document.addEventListener('keydown', function (e) {
+      if (!document.getElementById('lightbox-overlay').classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lightboxStep(e, -1);
+      if (e.key === 'ArrowRight') lightboxStep(e, 1);
+    });
+  </script>
 </body>
 </html>
